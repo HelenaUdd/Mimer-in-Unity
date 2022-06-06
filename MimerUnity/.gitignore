@@ -1,5 +1,7 @@
 # Visual Studio cache directory
 .vs/
 
-MimerUnity/bin
-MimerUnity/obj
+MimerUnity/bin/
+MimerUnity/obj/
+MimerUnityTest/bin/
+MimerUnityTest/obj/
