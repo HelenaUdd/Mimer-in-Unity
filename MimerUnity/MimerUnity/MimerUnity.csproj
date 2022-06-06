@@ -8,4 +8,8 @@
     <Exec Command="XCOPY &quot;$(OutDir)\MimerUnity.dll&quot; &quot;$(ProjectDir)\..\..\TicTacToe\Assets\Scripts\&quot; /Y" />
   </Target>
 
+  <ItemGroup>
+    <PackageReference Include="MimerSQL.Data.Provider" Version="11.0.214" />
+  </ItemGroup>
+
 </Project>
