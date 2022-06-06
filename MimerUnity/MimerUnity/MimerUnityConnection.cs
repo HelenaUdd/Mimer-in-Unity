@@ -35,5 +35,19 @@ namespace MimerUnity
         {
             connection.Close();
         }
+
+        public void ExecuteNonQueryCommand(string command)
+        {
+            MimerCommand executableCommand = new MimerCommand(command, connection);
+            executableCommand.ExecuteNonQuery();
+        }
+
+        public MimerDataReader ExecuteReaderCommand(string command)
+        {
+            MimerCommand executableCommand = new MimerCommand(command, connection);
+            MimerDataReader reader = executableCommand.ExecuteReader();
+
+            return reader;
+        }
     }
 }
