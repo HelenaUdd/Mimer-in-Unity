@@ -52,7 +52,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>COPY "$(ProjectDir)$(OutDir)MimerUnity.dll" "$(ProjectDir)..\..\TicTacToe\Assets\Plugins\"
+COPY "$(ProjectDir)$(OutDir)Mimer.Data.Client.dll" "$(ProjectDir)..\..\TicTacToe\Assets\Plugins\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
