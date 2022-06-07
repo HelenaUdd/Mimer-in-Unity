@@ -51,7 +51,8 @@ namespace MimerUnity.Test
                     Assert.AreEqual(new DateTime(2022, 6, 6, 15, 00, 0), occurrance);
                     Assert.AreEqual(2, player);
                     Assert.AreEqual(10, moves);
-                    Assert.AreEqual(12.3, time_spent.TotalSeconds);
+                    Assert.IsTrue(12.29 < time_spent.TotalSeconds);
+                    Assert.IsTrue(12.31 > time_spent.TotalSeconds);
                 }
                 catch (AssertionException)
                 {
