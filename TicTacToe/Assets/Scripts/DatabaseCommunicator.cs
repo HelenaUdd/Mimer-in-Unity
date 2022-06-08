@@ -1,5 +1,4 @@
 using UnityEngine;
-using MimerUnity;
 using Mimer.Data.Client;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ namespace MimerUnity
 {
     public class DatabaseCommunicator : MonoBehaviour
     {
-        private MimerUnityConnection connection = new MimerUnityConnection();
+        private MimerConnection connection;
 
         public struct Highscore
         {
@@ -23,14 +22,17 @@ namespace MimerUnity
         {
             short elementsToFetch = 5;
 
-            connection.Open("UnityDemo", "tictactoe", "tictactoe");
+            Open("UnityDemo", "tictactoe", "tictactoe");
 
             List<Highscore> list = new List<Highscore>(elementsToFetch);
+
             var commandBuilder = new StringBuilder();
             commandBuilder.Append("SELECT occurrance, player, moves, time_spent FROM highscores");
             commandBuilder.Append(" ORDER BY moves, time_spent FETCH FIRST ");
             commandBuilder.Append(elementsToFetch);
-            MimerDataReader reader = connection.ExecuteReaderCommand(commandBuilder.ToString());
+
+            MimerCommand selectCommand = new MimerCommand(commandBuilder.ToString(), connection);
+            MimerDataReader reader = selectCommand.ExecuteReader();
 
             while (reader.Read())
             {
@@ -49,6 +51,23 @@ namespace MimerUnity
             connection.Close();
 
             return list;
+        }
+
+        private void Open(string database, string username, string password)
+        {
+            var connectionString = new MimerConnectionStringBuilder();
+            connectionString.Add("Database", database);
+            connectionString.Add("User ID", username);
+            connectionString.Add("Password", password);
+
+            if (connection != null)
+            {
+                connection.Close();
+                connection = null;
+            }
+
+            connection = new MimerConnection(connectionString.ToString());
+            connection.Open();
         }
     }
 }
