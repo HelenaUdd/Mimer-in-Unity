@@ -15,6 +15,7 @@
 
 # Mimer.Data.Client.dll should be local to each work environment
 /[Aa]ssets/[Pp]lugins/Mimer.Data.Client.dll
+/[Aa]ssets/[Pp]lugins/Mimer.Data.Client.dll.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
