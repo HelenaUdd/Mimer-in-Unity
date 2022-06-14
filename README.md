@@ -17,9 +17,9 @@ A Unity project is not a project file, but rather a folder structure, containing
 2. Download one of the Mimer SQL Database packages. Choose the one corresponding to the platform of the machine you want to set up the database server on, which is not necessarily the same machine as you run Unity on. This example was tested on a Windows platform with the Windows 64-bit database server version 11.0.6B with Unity on the same machine.
 3. Run the installer of the Mimer SQL Database package of choice.
 4. Read the Getting Started guide for your chosen platform, they are available for [Windows](https://docs.mimer.com/MimerOnWindows/latest_mimerwin.html "Mimer SQL - Getting Started on Windows") and [Linux](https://docs.mimer.com/MimerOnLinux/latest_mimerlinux.html "Mimer SQL - Getting Started on Linux").
-5. Following the instructions in the Getting Started guide, create a database named "UnityDemo". The "Home Directory" should be set to the "Database" folder in this repository. Start the database server.
-6. Following the instructoins in the Getting Started guide, use a tool of choice (e.g. Mimer BSQL) to access the database server.
-7. How to use the exisitng databank? TO BE CONTINUED
+5. Following the instructions in the Getting Started guide, create a database named "UnityDemo". Start the database server.
+6. Following the instructions in the Getting Started guide, use a tool of choice (e.g. Mimer BSQL) to access the database server with your chosen system administrator credentials.
+7. Run the SQL script in the repository's Database folder, if Mimer BSQL is used you use the following command: `READ INPUT FROM '<path>\tictactoe.sql';`. This will create the data in the database that is expected from the example.
 
 ### Installing a Mimer ADO.NET provider
 The Mimer ADO.NET provider contains libraries for accessing your Mimer SQL database through .NET. It supports all versions of .NET Framework, .NET Core 3.1 and .NET 5, and can be used on Windows for all .NET versions, and on Linux for .NET Core 3.1 and .NET 5. Unity does however not support neither .NET Core nor .NET 5 at the time of writing this, and as such, the ADO.NET Provider used has to be for .NET Framework, not supporting Linux. The approach below is a Windows approach.
