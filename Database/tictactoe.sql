@@ -1,0 +1,8 @@
+CREATE IDENT tictactoe AS USER USING 'tictactoe';
+GRANT DATABANK TO tictactoe;
+DISCONNECT;
+CONNECT TO 'UnityDemo' USER 'tictactoe' USING 'tictactoe';
+CREATE DATABANK tictactoe;
+CREATE TABLE highscores (occurrance TIMESTAMP(0) NOT NULL, player SMALLINT NOT NULL, moves SMALLINT NOT NULL, time_spent INTERVAL SECOND(12,2) NOT NULL);
+INSERT INTO highscores VALUES (TIMESTAMP '2022-06-14 09:30:00', 1, 20, INTERVAL '30.25' SECOND);
+SELECT * FROM highscores;
