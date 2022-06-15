@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &10388186
 RectTransform:
   m_ObjectHideFlags: 0
@@ -447,6 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 103626868}
+  - component: {fileID: 103626869}
   m_Layer: 5
   m_Name: Game
   m_TagString: Untagged
@@ -475,6 +476,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &103626869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103626867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06d44109d44f0149ae74c23c9f265ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &157985862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -482,6 +495,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -568,7 +589,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross B3
+      value: B3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -584,6 +613,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: -8101512325329510068, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -670,7 +711,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross A2
+      value: A2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -912,6 +961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -998,7 +1051,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle C1
+      value: C1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -1014,6 +1079,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1100,7 +1169,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle B2
+      value: B2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -1116,6 +1197,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: -8101512325329510068, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1202,7 +1299,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross A1
+      value: A1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -1218,6 +1323,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1304,7 +1413,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle C2
+      value: C2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -1320,6 +1441,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1406,7 +1531,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle A1
+      value: A1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -1692,6 +1829,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1778,7 +1919,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle A2
+      value: A2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -1794,6 +1947,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1880,7 +2041,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross C3
+      value: C3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -2075,6 +2244,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2161,7 +2334,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle B3
+      value: B3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -2312,6 +2497,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2398,7 +2591,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross B2
+      value: B2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -2500,7 +2701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1347999262
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2537,6 +2738,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2623,7 +2832,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross A3
+      value: A3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -2706,6 +2923,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2792,7 +3013,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle C3
+      value: C3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -2857,6 +3090,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2943,7 +3180,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle B1
+      value: B1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -2959,6 +3208,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3045,7 +3302,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross B1
+      value: B1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -3061,6 +3326,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 10388186}
     m_Modifications:
+    - target: {fileID: 6605493652041520164, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911500, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3147,7 +3416,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7568997864765911501, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
       propertyPath: m_Name
-      value: Circle A3
+      value: A3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911506, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568997864765911507, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60dfa063d3061249af0ef93b6708cc7, type: 3}
@@ -3236,6 +3517,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3322,7 +3611,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross C1
+      value: C1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
@@ -3338,6 +3635,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347999262}
     m_Modifications:
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978840, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978841, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3424,7 +3729,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982201662946978842, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
       propertyPath: m_Name
-      value: Cross C2
+      value: C2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982201662946978847, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843257068183856040, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
+      propertyPath: m_ShowMaskGraphic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85e0fe49b3c0e8e479e89a9592771042, type: 3}
