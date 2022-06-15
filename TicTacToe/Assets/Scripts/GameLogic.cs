@@ -1,20 +1,77 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace MimerUnity
 {
     public class GameLogic : MonoBehaviour
     {
-        private GameObject player1;
-        private GameObject player2;
-        private GameObject currentPlayer;
-        private Image[] player1Images;
-        private Image[] player2Images;
-        private PlayerListener[] player1Listeners;
-        private PlayerListener[] player2Listeners;
+        public bool GameOver { get; private set; }
+        
+        private struct Player
+        {
+            public GameObject gameObject;
+            public Image[] images;
+            public Dictionary<string, PlayerMarker> playerMarkers;
+        }
+
+        private Player[] players = new Player[2];
+        private Player currentPlayer;
 
         void Start()
         {
+            GetPlayers();
+
+            currentPlayer = players[0];
+            PlayerSetActive(0, true);
+            PlayerSetActive(1, false);
+
+            GameOver = false;
+        }
+
+        public void ChangePlayer()
+        {
+            if (HasPlayerWon(0))
+            {
+                Debug.Log("Player 1 has won!");
+                GameOver = true;
+            }
+            else if (HasPlayerWon(1))
+            {
+                Debug.Log("Player 2 has won!");
+                GameOver = true;
+            }
+            else if (IsGameOver())
+            {
+                Debug.Log("Game is over, no one won.");
+                GameOver = true;
+            }
+            else
+            {
+                if (currentPlayer.Equals(players[0]))
+                {
+                    currentPlayer = players[1];
+                    PlayerSetActive(0, false);
+                    PlayerSetActive(1, true);
+                }
+                else if (currentPlayer.Equals(players[1]))
+                {
+                    currentPlayer = players[0];
+                    PlayerSetActive(0, true);
+                    PlayerSetActive(1, false);
+                }
+                else
+                {
+                    Debug.LogError("Invalid current player");
+                }
+            }
+        }
+
+        private void GetPlayers()
+        {
+            players[0] = new Player();
+            players[1] = new Player();
+            
             Transform p1 = transform.Find("Board/Player 1");
             Transform p2 = transform.Find("Board/Player 2");
             
@@ -27,92 +84,187 @@ namespace MimerUnity
                 Debug.LogError("Game object Player 2 not found");
             }
 
-            player1 = p1.gameObject;
-            player2 = p2.gameObject;
+            players[0].gameObject = p1.gameObject;
+            players[1].gameObject = p2.gameObject;
 
-            player1Images = player1.GetComponentsInChildren<Image>();
-            if (player1Images == null || player1Images.Length == 0)
+            players[0].images = players[0].gameObject.GetComponentsInChildren<Image>();
+            if (players[0].images == null || players[0].images.Length == 0)
             {
                 Debug.LogError("Found no images on player 1.");
             }
-            player2Images = player2.GetComponentsInChildren<Image>();
-            if (player2Images == null || player2Images.Length == 0)
+            players[1].images = players[1].gameObject.GetComponentsInChildren<Image>();
+            if (players[1].images == null || players[1].images.Length == 0)
             {
                 Debug.LogError("Found no images on player 2.");
             }
 
-            player1Listeners = player1.GetComponentsInChildren<PlayerListener>();
-            if (player1Listeners == null || player1Listeners.Length == 0)
+            PlayerMarker[] player1Markers = players[0].gameObject.GetComponentsInChildren<PlayerMarker>();
+            if (player1Markers == null || player1Markers.Length == 0)
             {
-                Debug.LogError("Found no player listeners on player 1.");
+                Debug.LogError("Found no player markers on player 1.");
             }
-            player2Listeners = player1.GetComponentsInChildren<PlayerListener>();
-            if (player2Listeners == null || player2Listeners.Length == 0)
+            PlayerMarker[] player2Markers = players[1].gameObject.GetComponentsInChildren<PlayerMarker>();
+            if (player2Markers == null || player2Markers.Length == 0)
             {
-                Debug.LogError("Found no player listeners on player 2.");
+                Debug.LogError("Found no player markers on player 2.");
             }
 
-            currentPlayer = player1;
-            Player1SetActive(true);
-            Player2SetActive(false);
-        }
-
-        public void ChangePlayer()
-        {
-            if (IsGameWon())
+            players[0].playerMarkers = new Dictionary<string, PlayerMarker>(player1Markers.Length);
+            players[1].playerMarkers = new Dictionary<string, PlayerMarker>(player2Markers.Length);
+            foreach (PlayerMarker marker in player1Markers)
             {
-                Debug.Log("Game won!");
+                players[0].playerMarkers[marker.gameObject.name] = marker;
             }
-            else
+            foreach (PlayerMarker marker in player2Markers)
             {
-                if (currentPlayer == player1)
-                {
-                    currentPlayer = player2;
-                    Player1SetActive(false);
-                    Player2SetActive(true);
-                }
-                else if (currentPlayer == player2)
-                {
-                    currentPlayer = player1;
-                    Player1SetActive(true);
-                    Player2SetActive(false);
-                }
-                else
-                {
-                    Debug.LogError("Invalid current player");
-                }
+                players[1].playerMarkers[marker.gameObject.name] = marker;
             }
         }
 
-        private void Player1SetActive(bool active)
+        private void PlayerSetActive(int index, bool active)
         {
-            foreach (Image image in player1Images)
+            foreach (Image image in players[index].images)
             {
                 image.raycastTarget = active;
             }
         }
 
-        private void Player2SetActive(bool active)
+        private bool IsGameOver()
         {
-            foreach (Image image in player2Images)
-            {
-                image.raycastTarget = active;
-            }
-        }
+            bool over = true;
 
-        private bool IsGameWon()
-        {
-            bool won = true;
-
-            foreach (PlayerListener player in player1Listeners)
+            foreach (KeyValuePair<string, PlayerMarker> marker in players[0].playerMarkers)
             {
-                if (player.taken == false)
+                if (marker.Value.taken == false)
                 {
-                    won = false;
+                    over = false;
                 }
             }
 
-            return won;
+            return over;
+        }
+
+        private bool HasPlayerWon(int playerIndex)
+        {
+            bool win = false;
+
+            if (players[playerIndex].playerMarkers["A1"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers["B1"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C1"].takenByMe)
+                    {
+                        /*
+                        *  [x][ ][ ]
+                        *  [x][ ][ ]
+                        *  [x][ ][ ]
+                        */
+                        win = true;
+                    }
+                }
+                else if (players[playerIndex].playerMarkers["A2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["A3"].takenByMe)
+                    {
+                        /*
+                        *  [x][x][x]
+                        *  [ ][ ][ ]
+                        *  [ ][ ][ ]
+                        */
+                        win = true;
+                    }
+                }
+                else if (players[playerIndex].playerMarkers["B2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C3"].takenByMe)
+                    {
+                        /*
+                        *  [x][ ][ ]
+                        *  [ ][x][ ]
+                        *  [ ][ ][x]
+                        */
+                        win = true;
+                    }
+                }
+            }
+
+            if (!win && players[playerIndex].playerMarkers["A2"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers["B2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C2"].takenByMe)
+                    {
+                        /*
+                        *  [ ][x][ ]
+                        *  [ ][x][ ]
+                        *  [ ][x][ ]
+                        */
+                        win = true;
+                    }
+                }
+            }
+
+            if (!win && players[playerIndex].playerMarkers["A3"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers["B3"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C3"].takenByMe)
+                    {
+                        /*
+                        *  [ ][ ][x]
+                        *  [ ][ ][x]
+                        *  [ ][ ][x]
+                        */
+                        win = true;
+                    }
+                }
+                else if (players[playerIndex].playerMarkers["B2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C1"].takenByMe)
+                    {
+                        /*
+                        *  [ ][ ][x]
+                        *  [ ][x][ ]
+                        *  [x][ ][ ]
+                        */
+                        win = true;
+                    }
+                }
+            }
+
+            if (!win && players[playerIndex].playerMarkers["B1"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers["B2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["B3"].takenByMe)
+                    {
+                        /*
+                        *  [ ][ ][ ]
+                        *  [x][x][x]
+                        *  [ ][ ][ ]
+                        */
+                        win = true;
+                    }
+                }
+            }
+
+            if (!win && players[playerIndex].playerMarkers["C1"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers["C2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C3"].takenByMe)
+                    {
+                        /*
+                        *  [ ][ ][ ]
+                        *  [ ][ ][ ]
+                        *  [x][x][x]
+                        */
+                        win = true;
+                    }
+                }
+            }
+
+            return win;
         }
     }
 }
