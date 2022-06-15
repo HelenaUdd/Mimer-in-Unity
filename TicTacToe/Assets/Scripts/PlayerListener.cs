@@ -10,7 +10,7 @@ namespace MimerUnity
         private Mask mask;
         private PlayerListener otherPlayersCorresponding;
 
-        public bool Taken { get; set; }
+        public bool taken = false;
 
         void Start()
         {
@@ -29,17 +29,17 @@ namespace MimerUnity
             GetOtherPlayersCorresponding();
 
             mask.showMaskGraphic = false;
-            Taken = false;
+            taken = false;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (!Taken)
+            if (!taken)
             {
+                taken = true;
                 mask.showMaskGraphic = true;
                 gameLogic.ChangePlayer();
-                Taken = true;
-                otherPlayersCorresponding.Taken = true;
+                otherPlayersCorresponding.taken = true;
             }
         }
 
