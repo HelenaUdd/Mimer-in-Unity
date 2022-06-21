@@ -35,13 +35,13 @@ namespace MimerUnity
             if (HasPlayerWon(0))
             {
                 Debug.Log("Player 1 has won!");
-                AddHighscore();
+                AddHighscore(1);
                 GameOver = true;
             }
             else if (HasPlayerWon(1))
             {
                 Debug.Log("Player 2 has won!");
-                AddHighscore();
+                AddHighscore(2);
                 GameOver = true;
             }
             else if (IsGameOver())
@@ -270,10 +270,11 @@ namespace MimerUnity
             return win;
         }
 
-        private void AddHighscore()
+        private void AddHighscore(short player)
         {
             var score = new DatabaseCommunicator.Highscore();
             score.occurrance = DateTime.Now;
+            score.player = player;
             DatabaseCommunicator.Instance.AddHighscore(score);
         }
     }
