@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 namespace MimerUnity
 {
@@ -34,11 +35,13 @@ namespace MimerUnity
             if (HasPlayerWon(0))
             {
                 Debug.Log("Player 1 has won!");
+                AddHighscore();
                 GameOver = true;
             }
             else if (HasPlayerWon(1))
             {
                 Debug.Log("Player 2 has won!");
+                AddHighscore();
                 GameOver = true;
             }
             else if (IsGameOver())
@@ -265,6 +268,13 @@ namespace MimerUnity
             }
 
             return win;
+        }
+
+        private void AddHighscore()
+        {
+            var score = new DatabaseCommunicator.Highscore();
+            score.occurrance = DateTime.Now;
+            DatabaseCommunicator.Instance.AddHighscore(score);
         }
     }
 }

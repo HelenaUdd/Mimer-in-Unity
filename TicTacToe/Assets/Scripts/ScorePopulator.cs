@@ -6,13 +6,12 @@ namespace MimerUnity
 {
     public class ScorePopulator : MonoBehaviour
     {
-        DatabaseCommunicator database;
-        TMPro.TextMeshProUGUI dateColumn;
-        TMPro.TextMeshProUGUI playerColumn;
-        TMPro.TextMeshProUGUI movesColumn;
-        TMPro.TextMeshProUGUI timeColumn;
+        private TMPro.TextMeshProUGUI dateColumn;
+        private TMPro.TextMeshProUGUI playerColumn;
+        private TMPro.TextMeshProUGUI movesColumn;
+        private TMPro.TextMeshProUGUI timeColumn;
 
-        void Start()
+        public void Start()
         {
             if (IsFindingComponents())
             {
@@ -22,51 +21,42 @@ namespace MimerUnity
 
         private bool IsFindingComponents()
         {
-            database = GetComponentInChildren<DatabaseCommunicator>();
             TMPro.TextMeshProUGUI[] texts = GetComponentsInChildren<TMPro.TextMeshProUGUI>();
 
-            if (database != null)
+            if (texts != null && texts.Length > 0)
             {
-                if (texts != null && texts.Length > 0)
+                foreach (TMPro.TextMeshProUGUI text in texts)
                 {
-                    foreach (TMPro.TextMeshProUGUI text in texts)
+                    if (text.gameObject.name.Equals("Date column"))
                     {
-                        if (text.gameObject.name.Equals("Date column"))
-                        {
-                            dateColumn = text;
-                        }
-                        else if (text.gameObject.name.Equals("Player column"))
-                        {
-                            playerColumn = text;
-                        }
-                        else if (text.gameObject.name.Equals("Moves column"))
-                        {
-                            movesColumn = text;
-                        }
-                        else if (text.gameObject.name.Equals("Time column"))
-                        {
-                            timeColumn = text;
-                        }
+                        dateColumn = text;
                     }
+                    else if (text.gameObject.name.Equals("Player column"))
+                    {
+                        playerColumn = text;
+                    }
+                    else if (text.gameObject.name.Equals("Moves column"))
+                    {
+                        movesColumn = text;
+                    }
+                    else if (text.gameObject.name.Equals("Time column"))
+                    {
+                        timeColumn = text;
+                    }
+                }
 
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("Failed to find text meshes to populate.");
-                    return false;
-                }
+                return true;
             }
             else
             {
-                Debug.Log("Failed to find DatabaseCommunicator.");
+                Debug.LogError("Failed to find text meshes to populate.");
                 return false;
             }
         }
 
         private void PopulateHighscoreTable()
         {
-            List<DatabaseCommunicator.Highscore> scores = database.GetHighscores();
+            List<DatabaseCommunicator.Highscore> scores = DatabaseCommunicator.Instance.GetHighscores();
 
             var dateBuilder = new StringBuilder();
             var playerBuilder = new StringBuilder();
