@@ -9,11 +9,12 @@ namespace MimerUnity
     {
         public bool GameOver { get; private set; }
         
-        private struct Player
+        private class Player
         {
             public GameObject gameObject;
             public Image[] images;
             public Dictionary<string, PlayerMarker> playerMarkers;
+            public short nrOfMoves;
         }
 
         private Player[] players = new Player[2];
@@ -28,20 +29,24 @@ namespace MimerUnity
             PlayerSetActive(1, false);
 
             GameOver = false;
+            players[0].nrOfMoves = 0;
+            players[1].nrOfMoves = 0;
         }
 
         public void ChangePlayer()
         {
+            currentPlayer.nrOfMoves++;
+
             if (HasPlayerWon(0))
             {
                 Debug.Log("Player 1 has won!");
-                AddHighscore(1);
+                AddHighscore(1, currentPlayer.nrOfMoves);
                 GameOver = true;
             }
             else if (HasPlayerWon(1))
             {
                 Debug.Log("Player 2 has won!");
-                AddHighscore(2);
+                AddHighscore(2, currentPlayer.nrOfMoves);
                 GameOver = true;
             }
             else if (IsGameOver())
@@ -51,13 +56,13 @@ namespace MimerUnity
             }
             else
             {
-                if (currentPlayer.Equals(players[0]))
+                if (currentPlayer == players[0])
                 {
                     currentPlayer = players[1];
                     PlayerSetActive(0, false);
                     PlayerSetActive(1, true);
                 }
-                else if (currentPlayer.Equals(players[1]))
+                else if (currentPlayer == players[1])
                 {
                     currentPlayer = players[0];
                     PlayerSetActive(0, true);
@@ -65,7 +70,7 @@ namespace MimerUnity
                 }
                 else
                 {
-                    Debug.LogError("Invalid current player");
+                    Debug.LogError($"Invalid current player {(currentPlayer.gameObject != null ? currentPlayer.gameObject.name : currentPlayer)}");
                 }
             }
         }
@@ -270,11 +275,12 @@ namespace MimerUnity
             return win;
         }
 
-        private void AddHighscore(short player)
+        private void AddHighscore(short player, short moves)
         {
             var score = new DatabaseCommunicator.Highscore();
             score.occurrance = DateTime.Now;
             score.player = player;
+            score.moves = moves;
             DatabaseCommunicator.Instance.AddHighscore(score);
         }
     }
