@@ -54,7 +54,7 @@ namespace MimerUnity
             }
         }
 
-        private void PopulateHighscoreTable()
+        public void PopulateHighscoreTable()
         {
             List<DatabaseCommunicator.Highscore> scores = DatabaseCommunicator.Instance.GetHighscores();
 

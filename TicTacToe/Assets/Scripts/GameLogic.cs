@@ -22,17 +22,12 @@ namespace MimerUnity
         private Player currentPlayer;
         
         private GameObject startNewGameButton;
+        private ScorePopulator scorePopulator;
 
         void Start()
         {
-            Transform buttonTransform = transform.Find("Start game button");
-            if (buttonTransform == null)
-            {
-                Debug.LogError("Failed to find start new game button");
-            }
-            startNewGameButton = buttonTransform.gameObject;
-
             GetPlayers();
+            GetHelperObjects();
 
             currentPlayer = null;
             PlayerReset(0);
@@ -154,6 +149,28 @@ namespace MimerUnity
             foreach (PlayerMarker marker in player2Markers)
             {
                 players[1].playerMarkers[marker.gameObject.name] = marker;
+            }
+        }
+
+        private void GetHelperObjects()
+        {
+            Transform buttonTransform = transform.Find("Start game button");
+            if (buttonTransform == null)
+            {
+                Debug.LogError("Failed to find start new game button");
+            }
+            startNewGameButton = buttonTransform.gameObject;
+
+            Transform highscoresTransform = transform.parent.Find("Highscores");
+            Transform scorePopulatorTransform = highscoresTransform.Find("ScorePopulator");
+            if (scorePopulatorTransform == null)
+            {
+                Debug.LogError("Failed to find score populator transform");
+            }
+            scorePopulator = scorePopulatorTransform.GetComponent<ScorePopulator>();
+            if (scorePopulator == null)
+            {
+                Debug.LogError("Failed to find score populator");
             }
         }
 
@@ -321,6 +338,7 @@ namespace MimerUnity
             score.player = player;
             score.moves = moves;
             DatabaseCommunicator.Instance.AddHighscore(score);
+            scorePopulator.PopulateHighscoreTable();
         }
     }
 }
