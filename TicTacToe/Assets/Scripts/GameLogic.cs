@@ -23,8 +23,11 @@ namespace MimerUnity
         
         private GameObject startNewGameButton;
         private ScorePopulator scorePopulator;
+        private TMPro.TextMeshProUGUI gameTimeText;
 
-        void Start()
+        private System.Diagnostics.Stopwatch stopwatch = new();
+
+        private void Start()
         {
             GetPlayers();
             GetHelperObjects();
@@ -35,6 +38,13 @@ namespace MimerUnity
 
             GameOngoing = false;
             GameOver = false;
+        }
+
+        private void Update()
+        {
+            float milliseconds = stopwatch.ElapsedMilliseconds;
+            float seconds = milliseconds / 1000;
+            gameTimeText.text = seconds.ToString("0.00") + " s";
         }
 
         public void StartNewGame()
@@ -48,6 +58,9 @@ namespace MimerUnity
             PlayerSetActive(1, false);
             GameOngoing = true;
             GameOver = false;
+
+            stopwatch.Reset();
+            stopwatch.Start();
         }
 
         public void ChangePlayer()
@@ -58,6 +71,7 @@ namespace MimerUnity
 
                 if (HasPlayerWon(0))
                 {
+                    stopwatch.Stop();
                     Debug.Log("Player 1 has won!");
                     AddHighscore(1, currentPlayer.nrOfMoves);
                     GameOver = true;
@@ -65,6 +79,7 @@ namespace MimerUnity
                 }
                 else if (HasPlayerWon(1))
                 {
+                    stopwatch.Stop();
                     Debug.Log("Player 2 has won!");
                     AddHighscore(2, currentPlayer.nrOfMoves);
                     GameOver = true;
@@ -72,6 +87,7 @@ namespace MimerUnity
                 }
                 else if (IsGameOver())
                 {
+                    stopwatch.Stop();
                     Debug.Log("Game is over, no one won.");
                     GameOver = true;
                     startNewGameButton.SetActive(true);
@@ -171,6 +187,17 @@ namespace MimerUnity
             if (scorePopulator == null)
             {
                 Debug.LogError("Failed to find score populator");
+            }
+
+            Transform gameTimeTextTransform = transform.Find("Game time");
+            if (gameTimeTextTransform == null)
+            {
+                Debug.LogError("Failed to find game time text transform");
+            }
+            gameTimeText = gameTimeTextTransform.GetComponent<TMPro.TextMeshProUGUI>();
+            if (gameTimeText == null)
+            {
+                Debug.LogError("Failed to find game time text component");
             }
         }
 
