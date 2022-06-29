@@ -28,9 +28,7 @@ namespace MimerUnity
             }
 
             GetOtherPlayersMarker();
-
-            mask.showMaskGraphic = false;
-            taken = false;
+            Unset();
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -42,6 +40,12 @@ namespace MimerUnity
                 mask.showMaskGraphic = true;
                 gameLogic.ChangePlayer();
             }
+        }
+
+        public void Unset()
+        {
+            taken = takenByMe = false;
+            mask.showMaskGraphic = false;
         }
 
         private void GetOtherPlayersMarker()

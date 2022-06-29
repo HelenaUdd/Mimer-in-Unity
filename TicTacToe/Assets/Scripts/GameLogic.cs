@@ -7,6 +7,7 @@ namespace MimerUnity
 {
     public class GameLogic : MonoBehaviour
     {
+        public bool GameOngoing { get; private set; }
         public bool GameOver { get; private set; }
         
         private class Player
@@ -19,58 +20,85 @@ namespace MimerUnity
 
         private Player[] players = new Player[2];
         private Player currentPlayer;
+        
+        private GameObject startNewGameButton;
 
         void Start()
         {
+            Transform buttonTransform = transform.Find("Start game button");
+            if (buttonTransform == null)
+            {
+                Debug.LogError("Failed to find start new game button");
+            }
+            startNewGameButton = buttonTransform.gameObject;
+
             GetPlayers();
+
+            currentPlayer = null;
+            PlayerReset(0);
+            PlayerReset(1);
+
+            GameOngoing = false;
+            GameOver = false;
+        }
+
+        public void StartNewGame()
+        {
+            startNewGameButton.SetActive(false);
+            PlayerReset(0);
+            PlayerReset(1);
 
             currentPlayer = players[0];
             PlayerSetActive(0, true);
             PlayerSetActive(1, false);
-
+            GameOngoing = true;
             GameOver = false;
-            players[0].nrOfMoves = 0;
-            players[1].nrOfMoves = 0;
         }
 
         public void ChangePlayer()
         {
-            currentPlayer.nrOfMoves++;
+            if (GameOngoing)
+            {
+                currentPlayer.nrOfMoves++;
 
-            if (HasPlayerWon(0))
-            {
-                Debug.Log("Player 1 has won!");
-                AddHighscore(1, currentPlayer.nrOfMoves);
-                GameOver = true;
-            }
-            else if (HasPlayerWon(1))
-            {
-                Debug.Log("Player 2 has won!");
-                AddHighscore(2, currentPlayer.nrOfMoves);
-                GameOver = true;
-            }
-            else if (IsGameOver())
-            {
-                Debug.Log("Game is over, no one won.");
-                GameOver = true;
-            }
-            else
-            {
-                if (currentPlayer == players[0])
+                if (HasPlayerWon(0))
                 {
-                    currentPlayer = players[1];
-                    PlayerSetActive(0, false);
-                    PlayerSetActive(1, true);
+                    Debug.Log("Player 1 has won!");
+                    AddHighscore(1, currentPlayer.nrOfMoves);
+                    GameOver = true;
+                    startNewGameButton.SetActive(true);
                 }
-                else if (currentPlayer == players[1])
+                else if (HasPlayerWon(1))
                 {
-                    currentPlayer = players[0];
-                    PlayerSetActive(0, true);
-                    PlayerSetActive(1, false);
+                    Debug.Log("Player 2 has won!");
+                    AddHighscore(2, currentPlayer.nrOfMoves);
+                    GameOver = true;
+                    startNewGameButton.SetActive(true);
+                }
+                else if (IsGameOver())
+                {
+                    Debug.Log("Game is over, no one won.");
+                    GameOver = true;
+                    startNewGameButton.SetActive(true);
                 }
                 else
                 {
-                    Debug.LogError($"Invalid current player {(currentPlayer.gameObject != null ? currentPlayer.gameObject.name : currentPlayer)}");
+                    if (currentPlayer == players[0])
+                    {
+                        currentPlayer = players[1];
+                        PlayerSetActive(0, false);
+                        PlayerSetActive(1, true);
+                    }
+                    else if (currentPlayer == players[1])
+                    {
+                        currentPlayer = players[0];
+                        PlayerSetActive(0, true);
+                        PlayerSetActive(1, false);
+                    }
+                    else
+                    {
+                        Debug.LogError($"Invalid current player {(currentPlayer.gameObject != null ? currentPlayer.gameObject.name : currentPlayer)}");
+                    }
                 }
             }
         }
@@ -134,6 +162,17 @@ namespace MimerUnity
             foreach (Image image in players[index].images)
             {
                 image.raycastTarget = active;
+            }
+        }
+
+        private void PlayerReset(int index)
+        {
+            PlayerSetActive(index, false);
+            players[index].nrOfMoves = 0;
+
+            foreach (KeyValuePair<string, PlayerMarker> marker in players[index].playerMarkers)
+            {
+                marker.Value.Unset();
             }
         }
 
