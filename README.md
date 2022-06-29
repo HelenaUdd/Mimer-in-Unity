@@ -44,7 +44,12 @@ On Windows, you have to access the Mimer.Data.Client.dll library and place it in
 1. Open the Unity Hub and select to Open or Add project from disk. Enter the TicTacToe folder in the repository, and select Add Project. The TicTacToe project should now have been added to your list of projects in Unity Hub.
 2. Click the TicTacToe project in the list in order to open it. Opening it might take a while, as Unity needs to load all assets and compile all scripts.
 3. Press the Play button to start the game. Highscores will be fetched from the Mimer SQL database upon starting.
-4. TICTACTOE GAME UNDER CONSTRUCTION
+4. Press the "Start new game" button to start a game. The game will be timed. Click/tap on the boxes to place a marker there for the current player.
+5. The game will detect if the game is won by either player, or if the game is over and no one won. When either player wins, a new entry is added to the database and the highscore list will be updated.
+
+#### Database communication
+There are two very basic calls to the database. One is a `SELECT`-statement, that fetches highscores, and one is an `INSERT`-statement, that adds new entries to the table. The `SELECT` statement is called by `ScorePopulator.PopulateHighscoreTable`, and the `INSERT` statement is called by `GameLogic.AddHighscore`.
+The class `DatabaseCommunicator` has been made a singleton, as in this case, only one connection to one specific server is had. This is absolutely not mandatory, multiple connections are supported by Mimer.Data.Client.dll.
 
 ### Reading more
 * [The Mimer SQL platform articles](https://developer.mimer.com/products/platform-articles/)
