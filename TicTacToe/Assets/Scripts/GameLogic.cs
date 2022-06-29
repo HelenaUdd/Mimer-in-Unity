@@ -364,6 +364,7 @@ namespace MimerUnity
             score.occurrance = DateTime.Now;
             score.player = player;
             score.moves = moves;
+            score.time_spent = stopwatch.Elapsed;
             DatabaseCommunicator.Instance.AddHighscore(score);
             scorePopulator.PopulateHighscoreTable();
         }
