@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 
 namespace MimerUnity
 {
@@ -28,6 +29,8 @@ namespace MimerUnity
 
         private System.Diagnostics.Stopwatch stopwatch = new();
 
+        private Task<int> insertTask = null;
+
         private void Start()
         {
             GetPlayers();
@@ -49,6 +52,16 @@ namespace MimerUnity
             float milliseconds = stopwatch.ElapsedMilliseconds;
             float seconds = milliseconds / 1000;
             gameTimeText.text = seconds.ToString("0.00") + " s";
+
+            if (insertTask != null)
+            {
+                if (insertTask.IsCompleted)
+                {
+                    Debug.Log($"Inserted a highscore into database.");
+                    scorePopulator.UpdateHighscoreTable();
+                    insertTask = null;
+                }
+            }
         }
 
         public void StartNewGame()
@@ -431,8 +444,8 @@ namespace MimerUnity
             score.player = player;
             score.moves = moves;
             score.time_spent = stopwatch.Elapsed;
-            DatabaseCommunicator.Instance.AddHighscore(score);
-            scorePopulator.PopulateHighscoreTable();
+
+            insertTask = DatabaseCommunicator.Instance.AddHighscoreAsync(score);
         }
     }
 }

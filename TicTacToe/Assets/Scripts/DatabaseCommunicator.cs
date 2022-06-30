@@ -27,26 +27,12 @@ namespace MimerUnity
 
         public List<Highscore> GetHighscores()
         {
-            Open("UnityDemo", "tictactoe", "tictactoe");
+            Open();
 
             Task<System.Data.Common.DbDataReader> selectTask = GetHighscoresAsync();
             selectTask.Wait();
 
-            MimerDataReader reader = (MimerDataReader)selectTask.Result;
-            List<Highscore> list = new List<Highscore>();
-            while (reader.Read())
-            {
-                Highscore highscore = new Highscore()
-                {
-                    occurrance = reader.GetDateTime(0),
-                    player = reader.GetInt16(1),
-                    moves = reader.GetInt16(2),
-                    time_spent = reader.GetTimeSpan(3)
-                };
-
-                list.Add(highscore);
-            }
-
+            List<Highscore> list = GetHighScoresFromDbReader(selectTask.Result);
             Debug.Log($"Fetched {list.Count} highscore(s) from database.");
             Close();
 
@@ -68,9 +54,29 @@ namespace MimerUnity
             return selectTask;
         }
 
+        public List<Highscore> GetHighScoresFromDbReader(System.Data.Common.DbDataReader dbReader)
+        {
+            MimerDataReader reader = (MimerDataReader)dbReader;
+            List<Highscore> list = new List<Highscore>();
+            while (reader.Read())
+            {
+                Highscore highscore = new Highscore()
+                {
+                    occurrance = reader.GetDateTime(0),
+                    player = reader.GetInt16(1),
+                    moves = reader.GetInt16(2),
+                    time_spent = reader.GetTimeSpan(3)
+                };
+
+                list.Add(highscore);
+            }
+
+            return list;
+        }
+
         public void AddHighscore(Highscore highscore)
         {
-            Open("UnityDemo", "tictactoe", "tictactoe");
+            Open();
 
             Task<int> insertTask = AddHighscoreAsync(highscore);
             insertTask.Wait();
@@ -95,12 +101,12 @@ namespace MimerUnity
             return insertTask;
         }
 
-        public void Open(string database, string username, string password)
+        public void Open()
         {
             var connectionString = new MimerConnectionStringBuilder();
-            connectionString.Add("Database", database);
-            connectionString.Add("User ID", username);
-            connectionString.Add("Password", password);
+            connectionString.Add("Database", "UnityDemo");
+            connectionString.Add("User ID", "tictactoe");
+            connectionString.Add("Password", "tictactoe");
 
             if (connection != null)
             {

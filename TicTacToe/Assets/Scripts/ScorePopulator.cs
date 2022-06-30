@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MimerUnity
 {
@@ -11,11 +12,13 @@ namespace MimerUnity
         private TMPro.TextMeshProUGUI movesColumn;
         private TMPro.TextMeshProUGUI timeColumn;
 
+        private Task<System.Data.Common.DbDataReader> selectTask = null;
+
         public void Start()
         {
             if (IsFindingComponents())
             {
-                PopulateHighscoreTable();
+                UpdateHighscoreTable();
             }
         }
 
@@ -54,10 +57,29 @@ namespace MimerUnity
             }
         }
 
-        public void PopulateHighscoreTable()
+        public void UpdateHighscoreTable()
         {
-            List<DatabaseCommunicator.Highscore> scores = DatabaseCommunicator.Instance.GetHighscores();
+            DatabaseCommunicator.Instance.Open();
+            selectTask = DatabaseCommunicator.Instance.GetHighscoresAsync();
+        }
 
+        private void Update()
+        {
+            if (selectTask != null)
+            {
+                if (selectTask.IsCompleted)
+                {
+                    List<DatabaseCommunicator.Highscore> scores =
+                        DatabaseCommunicator.Instance.GetHighScoresFromDbReader(selectTask.Result);
+                    Debug.Log($"Fetched {scores.Count} highscore(s) from database.");
+                    PopulateHighscoreTable(scores);
+                    selectTask = null;
+                }
+            }
+        }
+
+        private void PopulateHighscoreTable(List<DatabaseCommunicator.Highscore> scores)
+        {
             var dateBuilder = new StringBuilder();
             var playerBuilder = new StringBuilder();
             var movesBuilder = new StringBuilder();
