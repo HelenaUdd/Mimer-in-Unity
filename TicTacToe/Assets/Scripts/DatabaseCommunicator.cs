@@ -3,6 +3,7 @@ using Mimer.Data.Client;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MimerUnity
 {
@@ -26,20 +27,13 @@ namespace MimerUnity
 
         public List<Highscore> GetHighscores()
         {
-            short elementsToFetch = 5;
-
             Open("UnityDemo", "tictactoe", "tictactoe");
 
-            List<Highscore> list = new List<Highscore>(elementsToFetch);
+            Task<System.Data.Common.DbDataReader> selectTask = GetHighscoresAsync();
+            selectTask.Wait();
 
-            var commandBuilder = new StringBuilder();
-            commandBuilder.Append("SELECT occurrance, player, moves, time_spent FROM highscores");
-            commandBuilder.Append(" ORDER BY moves, time_spent FETCH FIRST ");
-            commandBuilder.Append(elementsToFetch);
-
-            MimerCommand selectCommand = new MimerCommand(commandBuilder.ToString(), connection);
-            MimerDataReader reader = selectCommand.ExecuteReader();
-
+            MimerDataReader reader = (MimerDataReader)selectTask.Result;
+            List<Highscore> list = new List<Highscore>();
             while (reader.Read())
             {
                 Highscore highscore = new Highscore()
@@ -54,15 +48,39 @@ namespace MimerUnity
             }
 
             Debug.Log($"Fetched {list.Count} highscore(s) from database.");
-            connection.Close();
+            Close();
 
             return list;
+        }
+
+        public Task<System.Data.Common.DbDataReader> GetHighscoresAsync()
+        {
+            short elementsToFetch = 5;
+
+            var commandBuilder = new StringBuilder();
+            commandBuilder.Append("SELECT occurrance, player, moves, time_spent FROM highscores");
+            commandBuilder.Append(" ORDER BY moves, time_spent FETCH FIRST ");
+            commandBuilder.Append(elementsToFetch);
+
+            MimerCommand selectCommand = new (commandBuilder.ToString(), connection);
+            Task<System.Data.Common.DbDataReader> selectTask = selectCommand.ExecuteReaderAsync();
+
+            return selectTask;
         }
 
         public void AddHighscore(Highscore highscore)
         {
             Open("UnityDemo", "tictactoe", "tictactoe");
 
+            Task<int> insertTask = AddHighscoreAsync(highscore);
+            insertTask.Wait();
+
+            Debug.Log($"Inserted a highscore into database.");
+            Close();
+        }
+
+        public Task<int> AddHighscoreAsync(Highscore highscore)
+        {
             MimerCommand insertCommand = 
                 new MimerCommand("INSERT INTO highscores VALUES (:occurrance, :player, :moves, :time_spent)", 
                 connection);
@@ -71,14 +89,13 @@ namespace MimerUnity
             insertCommand.Parameters.Add(new MimerParameter(":moves", highscore.moves));
             insertCommand.Parameters.Add(new MimerParameter(":time_spent", highscore.time_spent));
             
-            insertCommand.ExecuteNonQuery();
+            Task<int> insertTask = insertCommand.ExecuteNonQueryAsync();
             insertCommand.Parameters.Clear();
 
-            Debug.Log($"Inserted a highscore into database.");
-            connection.Close();
+            return insertTask;
         }
 
-        private void Open(string database, string username, string password)
+        public void Open(string database, string username, string password)
         {
             var connectionString = new MimerConnectionStringBuilder();
             connectionString.Add("Database", database);
@@ -93,6 +110,11 @@ namespace MimerUnity
 
             connection = new MimerConnection(connectionString.ToString());
             connection.Open();
+        }
+
+        public void Close()
+        {
+            connection.Close();
         }
 
         private void Awake()
