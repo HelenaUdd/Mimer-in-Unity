@@ -24,6 +24,7 @@ namespace MimerUnity
         private GameObject startNewGameButton;
         private ScorePopulator scorePopulator;
         private TMPro.TextMeshProUGUI gameTimeText;
+        private TMPro.TextMeshProUGUI gameStatusText;
 
         private System.Diagnostics.Stopwatch stopwatch = new();
 
@@ -38,6 +39,9 @@ namespace MimerUnity
 
             GameOngoing = false;
             GameOver = false;
+
+            gameTimeText.text = string.Empty;
+            gameStatusText.text = string.Empty;
         }
 
         private void Update()
@@ -59,6 +63,8 @@ namespace MimerUnity
             GameOngoing = true;
             GameOver = false;
 
+            gameStatusText.text = string.Empty;
+
             stopwatch.Reset();
             stopwatch.Start();
         }
@@ -72,7 +78,7 @@ namespace MimerUnity
                 if (HasPlayerWon(0))
                 {
                     stopwatch.Stop();
-                    Debug.Log("Player 1 has won!");
+                    gameStatusText.text = "Player 1 has won!";
                     AddHighscore(1, currentPlayer.nrOfMoves);
                     GameOver = true;
                     startNewGameButton.SetActive(true);
@@ -80,7 +86,7 @@ namespace MimerUnity
                 else if (HasPlayerWon(1))
                 {
                     stopwatch.Stop();
-                    Debug.Log("Player 2 has won!");
+                    gameStatusText.text = "Player 2 has won!";
                     AddHighscore(2, currentPlayer.nrOfMoves);
                     GameOver = true;
                     startNewGameButton.SetActive(true);
@@ -88,7 +94,7 @@ namespace MimerUnity
                 else if (IsGameOver())
                 {
                     stopwatch.Stop();
-                    Debug.Log("Game is over, no one won.");
+                    gameStatusText.text = "Game is over, no one won.";
                     GameOver = true;
                     startNewGameButton.SetActive(true);
                 }
@@ -114,6 +120,7 @@ namespace MimerUnity
             }
         }
 
+        #region Game object finding
         private void GetPlayers()
         {
             players[0] = new Player();
@@ -199,8 +206,21 @@ namespace MimerUnity
             {
                 Debug.LogError("Failed to find game time text component");
             }
-        }
 
+            Transform gameStatusTextTransform = transform.Find("Game status");
+            if (gameStatusTextTransform == null)
+            {
+                Debug.LogError("Failed to find game status text transform");
+            }
+            gameStatusText = gameStatusTextTransform.GetComponent<TMPro.TextMeshProUGUI>();
+            if (gameStatusText == null)
+            {
+                Debug.LogError("Failed to find game status text component");
+            }
+        }
+        #endregion
+
+        #region Game logic
         private void PlayerSetActive(int index, bool active)
         {
             foreach (Image image in players[index].images)
@@ -357,6 +377,7 @@ namespace MimerUnity
 
             return win;
         }
+        #endregion
 
         private void AddHighscore(short player, short moves)
         {
