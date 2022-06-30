@@ -48,7 +48,7 @@ On Windows, you have to access the Mimer.Data.Client.dll library and place it in
 5. The game will detect if the game is won by either player, or if the game is over and no one won. When either player wins, a new entry is added to the database and the highscore list will be updated.
 
 #### Database communication
-There are two very basic calls to the database. One is a `SELECT`-statement, that fetches highscores, and one is an `INSERT`-statement, that adds new entries to the table. The `SELECT` statement is called by `ScorePopulator.PopulateHighscoreTable`, and the `INSERT` statement is called by `GameLogic.AddHighscore`.
+There are two very basic calls to the database. One is a `SELECT`-statement, that fetches highscores, and one is an `INSERT`-statement, that adds new entries to the table. The `SELECT` statement is called by `ScorePopulator.UpdateHighscoreTable`, and the `INSERT` statement is called by `GameLogic.AddHighscore`.
 The class `DatabaseCommunicator` has been made a singleton, as in this case, only one connection to one specific server is had. This is absolutely not mandatory, multiple connections are supported by Mimer.Data.Client.dll.
 
 ### Reading more
