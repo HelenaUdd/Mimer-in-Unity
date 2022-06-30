@@ -75,30 +75,7 @@ namespace MimerUnity
             {
                 currentPlayer.nrOfMoves++;
 
-                if (HasPlayerWon(0))
-                {
-                    stopwatch.Stop();
-                    gameStatusText.text = "Player 1 has won!";
-                    AddHighscore(1, currentPlayer.nrOfMoves);
-                    GameOver = true;
-                    startNewGameButton.SetActive(true);
-                }
-                else if (HasPlayerWon(1))
-                {
-                    stopwatch.Stop();
-                    gameStatusText.text = "Player 2 has won!";
-                    AddHighscore(2, currentPlayer.nrOfMoves);
-                    GameOver = true;
-                    startNewGameButton.SetActive(true);
-                }
-                else if (IsGameOver())
-                {
-                    stopwatch.Stop();
-                    gameStatusText.text = "Game is over, no one won.";
-                    GameOver = true;
-                    startNewGameButton.SetActive(true);
-                }
-                else
+                if (!IsGameDone())
                 {
                     if (currentPlayer == players[0])
                     {
@@ -240,6 +217,22 @@ namespace MimerUnity
             }
         }
 
+        private short GetWinningPlayer()
+        {
+            if (HasPlayerWon(0))
+            {
+                return 0;
+            }
+            else if (HasPlayerWon(1))
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         private bool IsGameOver()
         {
             bool over = true;
@@ -259,123 +252,175 @@ namespace MimerUnity
         {
             bool win = false;
 
-            if (players[playerIndex].playerMarkers["A1"].takenByMe)
+            if (IsColumnTakenBy('1', playerIndex))
             {
-                if (players[playerIndex].playerMarkers["B1"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["C1"].takenByMe)
-                    {
-                        /*
-                        *  [x][ ][ ]
-                        *  [x][ ][ ]
-                        *  [x][ ][ ]
-                        */
-                        win = true;
-                    }
-                }
-                else if (players[playerIndex].playerMarkers["A2"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["A3"].takenByMe)
-                    {
-                        /*
-                        *  [x][x][x]
-                        *  [ ][ ][ ]
-                        *  [ ][ ][ ]
-                        */
-                        win = true;
-                    }
-                }
-                else if (players[playerIndex].playerMarkers["B2"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["C3"].takenByMe)
-                    {
-                        /*
-                        *  [x][ ][ ]
-                        *  [ ][x][ ]
-                        *  [ ][ ][x]
-                        */
-                        win = true;
-                    }
-                }
+                /*
+                *  [x][ ][ ]
+                *  [x][ ][ ]
+                *  [x][ ][ ]
+                */
+                win = true;
             }
-
-            if (!win && players[playerIndex].playerMarkers["A2"].takenByMe)
+            else if (IsColumnTakenBy('2', playerIndex))
             {
-                if (players[playerIndex].playerMarkers["B2"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["C2"].takenByMe)
-                    {
-                        /*
-                        *  [ ][x][ ]
-                        *  [ ][x][ ]
-                        *  [ ][x][ ]
-                        */
-                        win = true;
-                    }
-                }
+                /*
+                *  [ ][x][ ]
+                *  [ ][x][ ]
+                *  [ ][x][ ]
+                */
+                win = true;
             }
-
-            if (!win && players[playerIndex].playerMarkers["A3"].takenByMe)
+            else if (IsColumnTakenBy('3', playerIndex))
             {
-                if (players[playerIndex].playerMarkers["B3"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["C3"].takenByMe)
-                    {
-                        /*
-                        *  [ ][ ][x]
-                        *  [ ][ ][x]
-                        *  [ ][ ][x]
-                        */
-                        win = true;
-                    }
-                }
-                else if (players[playerIndex].playerMarkers["B2"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["C1"].takenByMe)
-                    {
-                        /*
-                        *  [ ][ ][x]
-                        *  [ ][x][ ]
-                        *  [x][ ][ ]
-                        */
-                        win = true;
-                    }
-                }
+                /*
+                *  [ ][ ][x]
+                *  [ ][ ][x]
+                *  [ ][ ][x]
+                */
+                win = true;
             }
-
-            if (!win && players[playerIndex].playerMarkers["B1"].takenByMe)
+            else if (IsRowTakenBy('A', playerIndex))
             {
-                if (players[playerIndex].playerMarkers["B2"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["B3"].takenByMe)
-                    {
-                        /*
-                        *  [ ][ ][ ]
-                        *  [x][x][x]
-                        *  [ ][ ][ ]
-                        */
-                        win = true;
-                    }
-                }
+                /*
+                *  [x][x][x]
+                *  [ ][ ][ ]
+                *  [ ][ ][ ]
+                */
+                win = true;
             }
-
-            if (!win && players[playerIndex].playerMarkers["C1"].takenByMe)
+            else if (IsRowTakenBy('B', playerIndex))
             {
-                if (players[playerIndex].playerMarkers["C2"].takenByMe)
-                {
-                    if (players[playerIndex].playerMarkers["C3"].takenByMe)
-                    {
-                        /*
-                        *  [ ][ ][ ]
-                        *  [ ][ ][ ]
-                        *  [x][x][x]
-                        */
-                        win = true;
-                    }
-                }
+                /*
+                *  [ ][ ][ ]
+                *  [x][x][x]
+                *  [ ][ ][ ]
+                */
+                win = true;
+            }
+            else if (IsRowTakenBy('C', playerIndex))
+            {
+                /*
+                *  [ ][ ][ ]
+                *  [ ][ ][ ]
+                *  [x][x][x]
+                */
+                win = true;
+            }
+            else if (IsNorthSouthDiagonalTakenBy(playerIndex))
+            {
+                /*
+                *  [x][ ][ ]
+                *  [ ][x][ ]
+                *  [ ][ ][x]
+                */
+                win = true;
+            }
+            else if (IsSouthNorthDiagonalTakenBy(playerIndex))
+            {
+                /*
+                *  [ ][ ][x]
+                *  [ ][x][ ]
+                *  [x][ ][ ]
+                */
+                win = true;
             }
 
             return win;
+        }
+
+        private bool IsColumnTakenBy(char column, int playerIndex)
+        {
+            if (players[playerIndex].playerMarkers[$"A{column}"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers[$"B{column}"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers[$"C{column}"].takenByMe)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsRowTakenBy(char row, int playerIndex)
+        {
+            if (players[playerIndex].playerMarkers[$"{row}1"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers[$"{row}2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers[$"{row}3"].takenByMe)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsNorthSouthDiagonalTakenBy(int playerIndex)
+        {
+            if (players[playerIndex].playerMarkers["A1"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers["B2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C3"].takenByMe)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsSouthNorthDiagonalTakenBy(int playerIndex)
+        {
+            if (players[playerIndex].playerMarkers["A3"].takenByMe)
+            {
+                if (players[playerIndex].playerMarkers["B2"].takenByMe)
+                {
+                    if (players[playerIndex].playerMarkers["C1"].takenByMe)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsGameDone()
+        {
+            bool isDone = false;
+            short winningPlayer = GetWinningPlayer();
+
+            if (winningPlayer >= 0)
+            {
+                isDone = true;
+                gameStatusText.text = $"Player {++winningPlayer} has won!";
+            }
+            else if (IsGameOver())
+            {
+                isDone = true;
+                gameStatusText.text = "Game is over, no one won.";
+            }
+
+            if (isDone)
+            {
+                stopwatch.Stop();
+                GameOver = true;
+                startNewGameButton.SetActive(true);
+            }
+
+            if (winningPlayer > 0)
+            {
+                AddHighscore(winningPlayer, currentPlayer.nrOfMoves);
+            }
+
+            return isDone;
         }
         #endregion
 
