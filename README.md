@@ -12,7 +12,7 @@ Install git. This document will not go into detail on how to install and use git
 In the repository top, there is a button called "Code" that has an option to "Download as ZIP". Download the code as a ZIP file, unzip it on your local hard drive, and work with it from there. It has no connection to the actual repository, but is rather a copy of the code in the state it was when you downloaded it.
 
 ### Installing Unity
-Install Unity from Unity's website, https://unity.com/. This document will not go into detail on how it's done, or how to work with Unity, as there are many other resources for that. The [Unity Learn](https://unity.com/learn) site is recommended for learning how to use Unity, and the [Unity Forums](https://forum.unity.com/) is recommended for asking questions. This example was created using Unity version 2021.3.4f1.
+Install Unity from Unity's website, https://unity.com/. This document will not go into detail on how it's done, or how to work with Unity, as there are many other resources for that. The [Unity Learn](https://unity.com/learn) site is recommended for learning how to use Unity, and the [Unity Forums](https://forum.unity.com/) is recommended for asking questions. This example was created using Unity version 2021.3.8f1.
 
 A Unity project is not a project file, but rather a folder structure, containing a folder called Assets, among others. The Assets folder in this example has a subfolder called Scripts, where the example code that calls the Mimer SQL database is found. Any APIs or plugins that are used by the scripts in Assets\Scripts are to be placed in an Assets\Plugins folder, which is not under version control in this repository, so you have to create it manually.
 
