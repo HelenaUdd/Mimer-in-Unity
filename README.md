@@ -4,8 +4,12 @@ This is an example implementation of using a Mimer Information Technology databa
 ## How to use it
 The following instructions indicate how to get the example in this repository running. The steps to recreating it in your own environment are similar. The author has only tried this in a pure Windows environment, but other platforms may or may not be supported, see detailed information in the instructions.
 
-### Cloning this repository
-Install git. This document will not go into detail on how to install and use git, as there are many other resources for that. The "Get started" guide at [GitHub Docs](https://docs.github.com/en/get-started) is a recommended starting point. Clone this repository onto your local hard drive using your preferred git client.
+### Cloning or downloading the example code
+To access the example code in this repository, you can either clone the repository with git (this enables you to easily update it, and also contribute to it), or download the files to your hard drive.
+#### Cloning the repository
+Install git. This document will not go into detail on how to install and use git, as there are many other resources for that. The "Get started" guide at [GitHub Docs](https://docs.github.com/en/get-started) is a recommended starting point. Clone this repository onto your local hard drive using your preferred git client. You can now update your code with any news that happen in the repository via git, or make changes to the code and ask to contribute them to the repository.
+#### Downloading the files
+In the repository top, there is a button called "Code" that has an option to "Download as ZIP". Download the code as a ZIP file, unzip it on your local hard drive, and work with it from there. It has no connection to the actual repository, but is rather a copy of the code in the state it was when you downloaded it.
 
 ### Installing Unity
 Install Unity from Unity's website, https://unity.com/. This document will not go into detail on how it's done, or how to work with Unity, as there are many other resources for that. The [Unity Learn](https://unity.com/learn) site is recommended for learning how to use Unity, and the [Unity Forums](https://forum.unity.com/) is recommended for asking questions. This example was created using Unity version 2021.3.4f1.
