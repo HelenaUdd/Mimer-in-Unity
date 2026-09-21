@@ -28,7 +28,7 @@ A Unity project is not a project file, but rather a folder structure, containing
 ### Installing a MimerSQL ADO.NET provider
 The Mimer ADO.NET provider contains libraries for accessing your Mimer SQL database through .NET. It supports all versions of .NET Framework, .NET Core 3.1 and .NET 5, and can be used on Windows for all .NET versions, and on Linux for .NET Core 3.1 and .NET 5. Unity does however not support neither .NET Core nor .NET 5 at the time of writing this, and as such, the ADO.NET Provider used has to be for .NET Framework, not supporting Linux. The approach below is a Windows approach.
 
-On Windows, you have to access the Mimer.Data.Client.dll library and place it in your Unity project folder. There are two ways to access it, both are described in more detail in the [documentation](https://docs.mimer.com/MimerNetDataProvider/latest_mimerdataprovider.html/#Installaion.html "Installing the Mimer SQL Data Provider"). Choose one of the two following approaches:
+On Windows, you have to access the Mimer.Data.Client.dll library and place it in your Unity project folder. There are two ways to access it, both are described in more detail in the [documentation](https://docs.mimer.com/MimerNetDataProvider/latest/webframe.html#Installation.html "Installing the Mimer SQL Data Provider"). Choose one of the two following approaches:
 
 #### Running the Windows installer
 1. Go to the Downloads page on the Mimer Developer website, https://developer.mimer.com/products/downloads/.
@@ -57,4 +57,4 @@ The class `DatabaseCommunicator` has been made a singleton, as in this case, onl
 
 ### Reading more
 * [The Mimer SQL platform articles](https://developer.mimer.com/products/platform-articles/)
-* [The Mimer.Data.Client documentation](https://docs.mimer.com/MimerNetDataProvider/latest_mimerdataprovider.html/#Mimer.Data.Client~Mimer.Data.Client_namespace.html)
+* [The Mimer.Data.Client documentation](https://docs.mimer.com/MimerNetDataProvider/latest/webframe.html#Mimer.Data.Client.html)
